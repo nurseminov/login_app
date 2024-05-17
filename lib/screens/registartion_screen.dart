@@ -1,5 +1,7 @@
+import 'package:authorization_neobis/main.dart';
 import 'package:authorization_neobis/screens/login_screen.dart';
-import 'package:authorization_neobis/widgets/text_field_widget.dart';
+import 'package:authorization_neobis/widgets/login_text_field.dart';
+import 'package:authorization_neobis/widgets/password_text_field.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationScreen extends StatelessWidget {
@@ -17,17 +19,22 @@ class RegistrationScreen extends StatelessWidget {
               children: [
                 const Text('Регистрация',  ),
               const SizedBox(height: 25,),
-              const Text('  Логин                                                                         ',),
+              const Text('Логин',),
               const SizedBox(height: 5,),
-              const TextFieldWidget(hintText: 'Логин',),
+
+              const LoginTextField(),
+
               const SizedBox(height: 10,),
               const Text('  Пароль                                                                       ',),
               const SizedBox(height: 5,),
-              const TextFieldWidget(hintText: 'Пароль',),
+
+              const PasswordTextField(),
+
               const SizedBox(height: 10,),
               const Text('Повторите пароль                                                               ',),
               const SizedBox(height: 5,),
-              const TextFieldWidget(hintText: 'Повторите Пароль',),
+
+              const PasswordTextField(),
 
              
               const SizedBox(height: 20,),
@@ -71,4 +78,10 @@ class RegistrationScreen extends StatelessWidget {
       ),
     );
   }
+}
+save() async {
+  await MyApp.init();
+  localStorage?.setString('Логин', emailController.text.toString());
+  localStorage?.setString('Пароль', pwdController.text.toString());
+
 }

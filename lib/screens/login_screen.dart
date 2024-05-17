@@ -1,9 +1,13 @@
+import 'package:authorization_neobis/main.dart';
+import 'package:authorization_neobis/screens/home_page.dart';
 import 'package:authorization_neobis/screens/registartion_screen.dart';
-import 'package:authorization_neobis/widgets/text_field_widget.dart';
+import 'package:authorization_neobis/widgets/login_text_field.dart';
+import 'package:authorization_neobis/widgets/password_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +22,19 @@ class LoginScreen extends StatelessWidget {
                 const Text('Войти',
               ),
               const SizedBox(height: 25,),
-              const Text('Логин                    ',
+              const Text('Логин',
               ),
               const SizedBox(height: 5,),
-              const TextFieldWidget(hintText: 'Логин',),
+              
+               const LoginTextField(),
+
               const SizedBox(height: 10,),
-              const Text('  Пароль                                                                  ',
+              const Text('Пароль',
               ),
               const SizedBox(height: 5,),
-              const TextFieldWidget(hintText: ' ● ● ● ● ● ● ',),
+
+              const PasswordTextField(),
+
               const SizedBox(
                 height: 35,
                 ),
@@ -38,7 +46,10 @@ class LoginScreen extends StatelessWidget {
                     backgroundColor: const Color.fromRGBO(0, 105, 255, 1),
                     ), 
                     onPressed: (){
-
+                       Navigator.push(
+                               context,
+                               MaterialPageRoute(builder: (context) => const MyHomePage()),
+                              );
                       }, 
                       child:  const Text('Войти',
                     ),
@@ -70,4 +81,11 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+save() async {
+  await MyApp.init();
+  localStorage?.setString('Логин', emailController.text.toString());
+  localStorage?.setString('Пароль', pwdController.text.toString());
+
 }
